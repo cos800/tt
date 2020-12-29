@@ -1,0 +1,21 @@
+{
+    "name": "cos800/tt",
+    "description": "thinkphp tools",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "cos800",
+            "email": "thisky@qq.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=7.1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "tt\\": "src/"
+        }
+    }
+}
