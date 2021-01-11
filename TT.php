@@ -21,4 +21,18 @@ class TT
         ob_implicit_flush();
         header('X-Accel-Buffering: no');
     }
+
+    static function error($msg='操作失败', $next='back') {
+        $data = [
+            'msg' => $msg,
+            'next' => $next,
+        ];
+        $resp = view(__DIR__.'/view/error.phtml', compact('data'));
+        throw new \think\exception\HttpResponseException($resp);
+    }
+
+    static function redirect($url, $raw=false) {
+        if (!$raw) $url = url($url);
+        throw new \think\exception\HttpResponseException(redirect($url));
+    }
 }

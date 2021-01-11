@@ -1,0 +1,55 @@
+{__NOLAYOUT__}<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_2321307_ypy8wjydiji.css">
+    <style>
+        html, body{
+            height: 100%;
+        }
+        body{
+            background: #eee;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .iconfont{
+            font-size: 60px;
+            margin-bottom: 10px;
+        }
+        .msg{
+        }
+        .btns{
+            display: flex;
+            margin-top: 20px;
+        }
+        .btn{
+            background: #ccc;
+            text-decoration: none;
+            color: inherit;
+            line-height: 35px;
+            padding: 0 20px;
+        }
+    </style>
+</head>
+<body>
+    <i class="iconfont icon-info"></i>
+    <div class="msg"><?=$data['msg']?></div>
+    <div class="btns">
+        <?php
+        switch ($data['next']) {
+            case 'back':
+                ?>
+                <a href="javascript:history.back()" class="btn">返回</a>
+                <?php
+                break;
+        }
+        ?>
+    </div>
+</body>
+</html>
