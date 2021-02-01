@@ -35,4 +35,55 @@ class TT
         if (!$raw) $url = url($url);
         throw new \think\exception\HttpResponseException(redirect($url));
     }
+
+    static function curl($url, $get=false, $post=false) {
+
+        if ($get) {
+            if (!is_string($get)) {
+                $get = http_build_query($get);
+            }
+            if (strpos($url, '?')===false) {
+                $url .= '?';
+            }else{
+                $url .= '&';
+            }
+            $url .= $get;
+        }
+
+        $curl = curl_init($url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+        if ($post) {
+            curl_setopt($curl, CURLOPT_POST, 1);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, $post);
+        }
+
+        $resp = curl_exec($curl);
+
+        if (curl_error($curl)) {
+            $error_msg = curl_error($curl);
+            $error_no = curl_errno($curl);
+            curl_close($curl);
+            throw new \Exception($error_msg, $error_no);
+        }
+
+        return $resp;
+
+    }
+
+    static function curlJson($url, $get=false, $post=false) {
+        $resp = self::curl($url, $get, $post);
+
+        if (!$resp) {
+            throw new Exception('response is empty');
+        }
+
+        $json = self::deJson($resp);
+
+        if (!$json) {
+            throw new Exception('json decode fail: '.$resp);
+        }
+
+        return $json;
+    }
 }
