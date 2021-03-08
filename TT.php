@@ -54,6 +54,7 @@ class TT
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
         if ($post) {
+            $post = http_build_query($post);
             curl_setopt($curl, CURLOPT_POST, 1);
             curl_setopt($curl, CURLOPT_POSTFIELDS, $post);
         }
